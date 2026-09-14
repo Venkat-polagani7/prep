@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GMAT MBA Command Center</title>
+<style>
+:root{
+  --bg:#f7f8fc;--card:#fff;--text:#172033;--muted:#6b7280;--line:#e8eaf0;
+  --purple:#7657ff;--pink:#ff5fa2;--blue:#2f80ed;--green:#16b364;--orange:#ff9f43;
+  --shadow:0 12px 35px rgba(32,25,74,.08);--radius:22px;
+}
+*{box-sizing:border-box} body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--text);background:
+radial-gradient(circle at 85% 0%,#eee8ff 0,transparent 28%),radial-gradient(circle at 0% 25%,#ffe8f2 0,transparent 22%),var(--bg)}
+button,input,select,textarea{font:inherit} button{cursor:pointer;border:0}
+.app{display:grid;grid-template-columns:250px 1fr;min-height:100vh}.sidebar{padding:28px 18px;background:rgba(255,255,255,.78);backdrop-filter:blur(18px);border-right:1px solid var(--line);position:sticky;top:0;height:100vh}
+.logo{display:flex;align-items:center;gap:11px;font-weight:900;font-size:19px;margin:2px 10px 32px}.logoMark{width:38px;height:38px;border-radius:13px;background:linear-gradient(135deg,var(--purple),var(--pink));display:grid;place-items:center;color:white;box-shadow:0 8px 20px #7657ff44}
+.nav{display:grid;gap:7px}.nav button{background:transparent;text-align:left;padding:13px 14px;border-radius:13px;color:#697080;font-weight:700}.nav button.active,.nav button:hover{background:#f0edff;color:var(--purple)}
+.sideNote{position:absolute;bottom:25px;left:22px;right:22px;background:#fff;border:1px solid var(--line);border-radius:18px;padding:15px;font-size:12px;color:var(--muted)}
+main{padding:30px;max-width:1400px;width:100%;margin:auto}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:25px}.eyebrow{color:var(--purple);font-size:12px;font-weight:900;letter-spacing:.12em;text-transform:uppercase}.top h1{margin:5px 0 0;font-size:30px;letter-spacing:-.03em}.datePill{background:white;border:1px solid var(--line);padding:10px 14px;border-radius:14px;font-weight:700;color:var(--muted)}
+.page{display:none}.page.active{display:block}.grid{display:grid;gap:18px}.hero{display:grid;grid-template-columns:1.55fr 1fr;gap:18px}.card{background:rgba(255,255,255,.92);border:1px solid rgba(232,234,240,.9);box-shadow:var(--shadow);border-radius:var(--radius);padding:22px}.gradient{background:linear-gradient(135deg,#5f46e9,#8a61ff 55%,#ff5fa2);color:#fff;border:0;overflow:hidden;position:relative}.gradient:after{content:"";position:absolute;width:250px;height:250px;border-radius:50%;right:-70px;top:-90px;background:#fff2;filter:blur(1px)}.heroTitle{font-size:18px;font-weight:800;position:relative;z-index:1}.count{font-size:55px;font-weight:950;letter-spacing:-.06em;margin:13px 0 3px;position:relative;z-index:1}.sub{color:#ffffffcc;font-size:13px;position:relative;z-index:1}.timer{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:20px;position:relative;z-index:1}.timebox{background:#ffffff20;border:1px solid #ffffff25;border-radius:15px;padding:12px;text-align:center}.timebox b{font-size:22px;display:block}.timebox span{font-size:10px;text-transform:uppercase;color:#ffffffb5}.scoreCard h3,.card h3{margin:0 0 15px}.scoreBig{font-size:42px;font-weight:950}.progress{height:9px;background:#eeeef4;border-radius:99px;overflow:hidden}.progress>i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--purple),var(--pink))}.statgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin:18px 0}.stat{padding:18px;border-radius:18px;background:#fff;border:1px solid var(--line);box-shadow:0 8px 25px #28204a08}.stat b{font-size:26px}.stat span{display:block;color:var(--muted);font-size:12px;margin-top:4px}.two{display:grid;grid-template-columns:1fr 1fr;gap:18px}.three{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.sectionHead{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px}.btn{padding:10px 14px;border-radius:12px;font-weight:800;background:#f0edff;color:var(--purple)}.btn.primary{background:var(--purple);color:white}.btn.danger{background:#fff0f2;color:#d63355}.list{display:grid;gap:10px}.row{display:flex;align-items:center;gap:12px;padding:13px;border:1px solid var(--line);border-radius:15px;background:#fff}.row input[type=checkbox]{accent-color:var(--purple);width:18px;height:18px}.rowText{flex:1}.rowText b{font-size:13px}.rowText small{display:block;color:var(--muted);margin-top:3px}.tag{padding:5px 8px;border-radius:99px;background:#f2f3f8;font-size:10px;font-weight:800;color:#667085}.chart{height:220px;display:flex;align-items:end;gap:13px;padding:15px 8px 0}.barWrap{flex:1;height:100%;display:flex;align-items:end;gap:6px}.bar{flex:1;border-radius:8px 8px 3px 3px;background:linear-gradient(180deg,#8d74ff,#5d46e8);min-height:8px}.bar.alt{background:linear-gradient(180deg,#ff8bbb,#ff5b9f)}.barLabel{font-size:10px;color:var(--muted);text-align:center;margin-top:6px}.form{display:grid;gap:10px}.form input,.form select,.form textarea{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:12px;outline:none;background:white}.form textarea{min-height:75px;resize:vertical}.actions{display:flex;gap:8px;justify-content:flex-end;margin-top:8px}.modal{position:fixed;inset:0;background:#16132b77;display:none;place-items:center;padding:20px;z-index:20}.modal.show{display:grid}.modalBox{background:white;width:min(520px,100%);border-radius:24px;padding:23px;box-shadow:0 30px 80px #0003}.close{float:right;background:#f3f4f7;border-radius:10px;width:34px;height:34px}.checkline{display:flex;gap:12px;align-items:center}.school{display:flex;justify-content:space-between;align-items:center;padding:14px;border:1px solid var(--line);border-radius:15px}.school b{font-size:14px}.school small{display:block;color:var(--muted)}.empty{text-align:center;padding:25px;color:var(--muted)}.toast{position:fixed;bottom:24px;right:24px;background:#172033;color:white;padding:13px 17px;border-radius:13px;display:none;z-index:30}.mobileNav{display:none}
+@media(max-width:900px){.app{grid-template-columns:1fr}.sidebar{display:none}.mobileNav{display:flex;position:fixed;bottom:0;left:0;right:0;background:white;border-top:1px solid var(--line);z-index:10;justify-content:space-around;padding:7px}.mobileNav button{background:white;padding:8px;color:#697080;font-size:11px}.mobileNav button.active{color:var(--purple);font-weight:900}main{padding:20px 16px 80px}.hero,.two,.three{grid-template-columns:1fr}.statgrid{grid-template-columns:repeat(2,1fr)}.top h1{font-size:24px}.datePill{display:none}}
+
+.scoreTiles{display:grid;gap:12px}
+.scoreTile{border:1px solid var(--line);border-radius:17px;background:#fff;overflow:hidden}
+.scoreHead{display:flex;align-items:center;justify-content:space-between;padding:16px 18px;cursor:pointer}
+.scoreHead:hover{background:#faf9ff}
+.scoreRange{font-size:20px;font-weight:950}.scoreHint{font-size:11px;color:var(--muted);margin-top:3px}
+.chev{font-size:18px;color:var(--purple);transition:.2s}.scoreBody{display:none;padding:0 18px 18px;border-top:1px solid var(--line)}
+.scoreTile.open .scoreBody{display:block}.scoreTile.open .chev{transform:rotate(180deg)}
+.schoolGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin-top:14px}
+.schoolMini{padding:12px;border-radius:13px;background:#f8f8fb}.schoolMini b{font-size:13px}.schoolMini small{display:block;color:var(--muted);margin-top:3px;line-height:1.35}
+.badgeIndia{background:#fff0e6;color:#d96a12}.badgeWorld{background:#eeeaff;color:#6948df}
+.profileCards{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.profileCard{padding:16px;border:1px solid var(--line);border-radius:16px;background:#fff}.profileCard h4{margin:0 0 7px}.profileCard p{font-size:12px;color:var(--muted);line-height:1.5;margin:0}.source{font-size:10px;color:var(--purple);font-weight:800;margin-top:9px}
+.planTable{display:grid;gap:9px}.planDay{display:grid;grid-template-columns:80px 1fr auto;gap:12px;align-items:center;padding:13px;border:1px solid var(--line);border-radius:15px}.planDay b{font-size:12px}.planDay input{border:0;background:transparent;width:100%;font-size:13px;outline:none}.planDay .tag{white-space:nowrap}
+@media(max-width:700px){.schoolGrid,.profileCards{grid-template-columns:1fr}.planDay{grid-template-columns:55px 1fr}.planDay .tag{display:none}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+  <div class="logo"><div class="logoMark">GM</div> MBA Command</div>
+  <div class="nav">
+    <button class="active" data-page="dashboard">⌂ &nbsp; Dashboard</button>
+    <button data-page="gmat">◈ &nbsp; GMAT Tracker</button>
+    <button data-page="errors">⚡ &nbsp; Error Log</button>
+    <button data-page="profile">✦ &nbsp; MBA Profile</button>
+    <button data-page="schools">◎ &nbsp; School List</button>
+    <button data-page="scoremap">▣ &nbsp; Score Map</button>
+  </div>
+  <div class="sideNote"><b>One mission.</b><br>GMAT + profile + applications, without the chaos.</div>
+</aside>
+<main>
+<div class="top"><div><div class="eyebrow">October GMAT Sprint</div><h1 id="greeting">Let's make the next 25 days count.</h1></div><div class="datePill" id="today"></div></div>
+
+<section id="dashboard" class="page active">
+<div class="hero">
+  <div class="card gradient"><div class="heroTitle">🎯 GMAT target day — October 10, 2026</div><div class="count" id="days">25</div><div class="sub">days remaining from September 15 • keep the focus narrow</div>
+    <div class="timer"><div class="timebox"><b id="dh">00</b><span>days</span></div><div class="timebox"><b id="hh">00</b><span>hours</span></div><div class="timebox"><b id="mm">00</b><span>minutes</span></div></div>
+  </div>
+  <div class="card scoreCard"><h3>Latest mock</h3><div class="scoreBig" id="latestScore">—</div><p id="scoreMeta" style="color:var(--muted);font-size:12px">Add your first mock to start tracking.</p><div class="progress"><i id="scoreProgress" style="width:0%"></i></div><div style="display:flex;justify-content:space-between;margin-top:8px;font-size:11px;color:var(--muted)"><span>Current</span><span id="targetLabel">Target 700+</span></div></div>
+</div>
+<div class="statgrid">
+ <div class="stat"><b id="mockCount">0</b><span>Mocks logged</span></div><div class="stat"><b id="errorCount">0</b><span>Errors reviewed</span></div><div class="stat"><b id="profilePct">0%</b><span>Profile complete</span></div><div class="stat"><b id="studyDays">0</b><span>Study days logged</span></div>
+</div>
+<div class="two">
+ <div class="card"><div class="sectionHead"><h3>Next 7 days</h3><button class="btn" onclick="showPage('gmat')">Open plan</button></div><div id="dashTasks" class="list"></div></div>
+ <div class="card"><div class="sectionHead"><h3>Score trajectory</h3><button class="btn primary" onclick="openModal('mock')">+ Mock</button></div><div id="chart" class="chart"></div><div id="chartLabels" style="display:flex;gap:13px;padding:0 8px"></div></div>
+</div>
+</section>
+
+<section id="gmat" class="page">
+<div class="card"><div class="sectionHead"><div><h3>GMAT practice tracker</h3><span style="font-size:12px;color:var(--muted)">Log mocks and turn mistakes into a repeatable plan.</span></div><button class="btn primary" onclick="openModal('mock')">+ Log mock</button></div><div id="mockList" class="list"></div></div>
+<div class="two" style="margin-top:18px"><div class="card"><h3>Section focus</h3><div id="sectionFocus" class="list"></div></div><div class="card"><h3>Study checklist</h3><div id="studyList" class="list"></div></div></div>
+
+<div class="card" style="margin-top:18px"><div class="sectionHead"><div><h3>20-day GMAT sprint</h3><span style="font-size:12px;color:var(--muted)">A practical September 15 → October 4 core plan, leaving the final days for mocks, review and recovery. Edit any day directly.</span></div><button class="btn primary" onclick="resetPlan()">Reset plan</button></div><div id="planTable" class="planTable"></div></div>
+<div class="card" style="margin-top:18px"><h3>Profile examples worth studying</h3><p style="font-size:12px;color:var(--muted)">These are public success-story patterns, not templates to copy. The useful part is the evidence: leadership, impact, clear goals and a coherent story.</p><div id="profileExamples" class="profileCards"></div></div>
+</section>
+
+<section id="errors" class="page">
+<div class="card"><div class="sectionHead"><div><h3>Error log</h3><span style="font-size:12px;color:var(--muted)">Capture why you missed it — not just what you missed.</span></div><button class="btn primary" onclick="openModal('error')">+ Add error</button></div><div id="errorList" class="list"></div></div>
+</section>
+
+<section id="profile" class="page">
+<div class="card"><div class="sectionHead"><div><h3>MBA profile builder</h3><span style="font-size:12px;color:var(--muted)">Build evidence of leadership, impact and clarity while GMAT prep is running.</span></div></div><div id="profileList" class="list"></div></div>
+<div class="two" style="margin-top:18px"><div class="card"><h3>Story bank</h3><p style="font-size:12px;color:var(--muted)">Collect 6–8 stories with situation → action → measurable result → lesson.</p><button class="btn primary" onclick="openModal('story')">+ Add story</button><div id="storyList" class="list" style="margin-top:12px"></div></div>
+<div class="card"><h3>Application readiness</h3><div id="readiness"></div></div></div>
+</section>
+
+<section id="schools" class="page">
+<div class="card"><div class="sectionHead"><div><h3>Target school list</h3><span style="font-size:12px;color:var(--muted)">Use this to compare fit, deadlines and application status.</span></div><button class="btn primary" onclick="openModal('school')">+ Add school</button></div><div id="schoolList" class="list"></div></div>
+</section>
+
+<section id="scoremap" class="page">
+<div class="card"><div class="sectionHead"><div><h3>GMAT score → school map</h3><span style="font-size:12px;color:var(--muted)">Use these as planning bands, not admission guarantees. Schools assess the whole profile and some publish no hard GMAT cutoff.</span></div></div>
+<div id="scoreTiles" class="scoreTiles"></div></div>
+<div class="card" style="margin-top:18px"><h3>How to read this</h3><div class="two">
+<div><p style="font-size:13px;line-height:1.6"><b>India:</b> the score bands below combine reported class averages / competitive benchmarks. For example, IIMA's current PGP process lists a 665 GMAT Focus minimum for that specific eligibility route, while many other Indian programmes do not publish a simple hard cutoff.</p></div>
+<div><p style="font-size:13px;line-height:1.6"><b>Global:</b> a 650–699 can be viable at many strong programmes, but the M7/top US schools typically sit much higher. A 700+ score gives substantially more flexibility, but profile strength still matters.</p></div>
+</div></div>
+</section>
+</main>
+</div>
+<div class="mobileNav"><button class="active" data-page="dashboard">⌂<br>Home</button><button data-page="gmat">◈<br>GMAT</button><button data-page="errors">⚡<br>Errors</button><button data-page="profile">✦<br>Profile</button><button data-page="schools">◎<br>Schools</button><button data-page="scoremap">▣<br>Scores</button></div>
+
+<div class="modal" id="modal"><div class="modalBox"><button class="close" onclick="closeModal()">×</button><div id="modalContent"></div></div></div><div class="toast" id="toast"></div>
+
+<script>
+const KEY='mba-command-center-v1';
+let data=JSON.parse(localStorage.getItem(KEY)||'null')||{
+ mocks:[],errors:[],stories:[],schools:[],
+ profile:[
+  ['GMAT score / test plan','Lock test date and target score'],['Resume','One-page impact-focused MBA resume'],
+  ['Leadership stories','6–8 strong stories with measurable outcomes'],['Recommenders','Identify 2 people + brief them early'],
+  ['School research','Fit, goals, culture, employment outcomes'],['Career goals','Short-term role + long-term direction'],
+  ['Why MBA / Why now','Clear personal logic, not generic reasons'],['Community / impact','Evidence beyond job description']
+ ],
+ tasks:[
+  ['Quant foundations','Review weak topics + 25 timed questions'],['Verbal accuracy','Critical reasoning + reading comprehension'],['Data Insights','2 timed sets + review every miss'],
+  ['Mock analysis','Spend as much time reviewing as taking it'],['Error-log review','Redo old misses without looking at answer'],['Profile hour','Write one leadership story'],['Recovery','Sleep, walk, reset — consistency beats panic']
+ ],
+ plan:[['Sep 15','Baseline mock + full analysis','Mock'],['Sep 16','Quant foundations: arithmetic, algebra + 30 timed Q','Quant'],['Sep 17','Verbal: CR fundamentals + 25 questions','Verbal'],['Sep 18','Data Insights: MSR, tables, graphs + 2 sets','DI'],['Sep 19','Quant: number properties + word problems + error review','Quant'],['Sep 20','Verbal: RC + CR timed set + review','Verbal'],['Sep 21','Mini mock: 45–60 min + deep review','Mock'],['Sep 22','Quant weakest 2 topics + 35 timed Q','Quant'],['Sep 23','Verbal weakest 2 types + 30 timed Q','Verbal'],['Sep 24','DI mixed timed set + data sufficiency practice','DI'],['Sep 25','Full mock #2 + same-day mistake classification','Mock'],['Sep 26','Recover 2h max: redo top 10 errors','Review'],['Sep 27','Quant mixed set + timing strategy','Quant'],['Sep 28','Verbal mixed set + timing strategy','Verbal'],['Sep 29','DI mixed set + timing strategy','DI'],['Sep 30','Full mock #3 + detailed review','Mock'],['Oct 1','Patch only recurring errors + formula/strategy sheet','Review'],['Oct 2','Final serious mock + decision on retake readiness','Mock'],['Oct 3','Light review: error log + 20 confidence questions','Light'],['Oct 4','Rest + logistics + sleep; no heavy new material','Recovery']]
+};
+function save(){localStorage.setItem(KEY,JSON.stringify(data));render();toast('Saved ✓')}
+function toast(x){let t=document.getElementById('toast');t.textContent=x;t.style.display='block';setTimeout(()=>t.style.display='none',1800)}
+function showPage(id){document.querySelectorAll('.page').forEach(x=>x.classList.toggle('active',x.id===id));document.querySelectorAll('[data-page]').forEach(x=>x.classList.toggle('active',x.dataset.page===id));window.scrollTo({top:0,behavior:'smooth'})}
+document.querySelectorAll('[data-page]').forEach(b=>b.onclick=()=>showPage(b.dataset.page));
+function openModal(type){
+ const forms={
+ mock:`<h2>Log a mock</h2><div class="form"><input id="fDate" type="date" value="${new Date().toISOString().slice(0,10)}"><input id="fScore" type="number" placeholder="Total score (e.g. 655)"><input id="fQuant" type="number" placeholder="Quant score"><input id="fVerbal" type="number" placeholder="Verbal score"><input id="fDI" type="number" placeholder="Data Insights score"><textarea id="fNote" placeholder="What went well / what needs work?"></textarea><div class="actions"><button class="btn" onclick="closeModal()">Cancel</button><button class="btn primary" onclick="addMock()">Save mock</button></div></div>`,
+ error:`<h2>Add an error</h2><div class="form"><select id="eSection"><option>Quant</option><option>Verbal</option><option>Data Insights</option></select><input id="eType" placeholder="Question type (e.g. Number Properties)"><select id="eReason"><option>Concept gap</option><option>Careless error</option><option>Timing</option><option>Misread question</option><option>Strategy issue</option></select><textarea id="eLesson" placeholder="What will you do differently next time?"></textarea><div class="actions"><button class="btn" onclick="closeModal()">Cancel</button><button class="btn primary" onclick="addError()">Save error</button></div></div>`,
+ story:`<h2>Add story</h2><div class="form"><input id="sTitle" placeholder="Story title"><textarea id="sResult" placeholder="Situation → action → measurable result → lesson"></textarea><div class="actions"><button class="btn" onclick="closeModal()">Cancel</button><button class="btn primary" onclick="addStory()">Save story</button></div></div>`,
+ school:`<h2>Add school</h2><div class="form"><input id="scName" placeholder="School name"><input id="scDeadline" placeholder="Application deadline / round"><select id="scStatus"><option>Researching</option><option>Shortlist</option><option>Applying</option><option>Submitted</option></select><div class="actions"><button class="btn" onclick="closeModal()">Cancel</button><button class="btn primary" onclick="addSchool()">Save school</button></div></div>`
+ };
+ document.getElementById('modalContent').innerHTML=forms[type];document.getElementById('modal').classList.add('show');
+}
+function closeModal(){document.getElementById('modal').classList.remove('show')}
+function addMock(){data.mocks.push({date:fDate.value,score:+fScore.value,quant:+fQuant.value||0,verbal:+fVerbal.value||0,di:+fDI.value||0,note:fNote.value});closeModal();save()}
+function addError(){data.errors.unshift({section:eSection.value,type:eType.value||'Unspecified',reason:eReason.value,lesson:eLesson.value});closeModal();save()}
+function addStory(){data.stories.unshift({title:sTitle.value||'Untitled story',result:sResult.value});closeModal();save()}
+function addSchool(){data.schools.push({name:scName.value||'Untitled school',deadline:scDeadline.value||'—',status:scStatus.value});closeModal();save()}
+function del(arr,i){data[arr].splice(i,1);save()}
+function toggleProfile(i){data.profile[i][2]=data.profile[i][2]==='DONE'?'TODO':'DONE';save()}
+
+const scoreBands=[
+ {r:'500–549',h:'Exploration / safer-fit territory',i:['IFMR GSB Krea (~525)','TAPMI (~565)','Great Lakes (~560)'],w:['Look at regional / specialist programmes; many top global schools will be unrealistic at this score.']},
+ {r:'550–599',h:'Several Indian options open',i:['NMIMS Mumbai (~570)','Great Lakes Chennai (~560)','TAPMI Manipal (~565)','XUB Bhubaneswar (~595)','IIM Indore EPGP (~600, competitive)'],w:['Cambridge / LBS / INSEAD may be possible only with a very strong overall profile; do not treat this as a safe band.']},
+ {r:'600–649',h:'Strong Indian target band',i:['IIM Lucknow IPMX (~610)','SPJIMR (~625)','IIM Calcutta MBAEx (~645)','IIM Ahmedabad PGPX (~648)'],w:['HEC/Cambridge/LBS-type programmes become more plausible, but school-specific ranges and profile fit matter.']},
+ {r:'650–699',h:'Competitive global + top Indian territory',i:['ISB (~670 class average)','IIM Bangalore EPGP (~704 average; 650s can still be profile-dependent)','IIM Ahmedabad PGPX (~648)','IIM Calcutta MBAEx (~645)','SPJIMR (~625)'],w:['HEC, LBS, Cambridge, INSEAD and strong US programmes become realistic targets depending on profile.']},
+ {r:'700–749',h:'Top-school competitive band',i:['ISB','IIM Bangalore EPGP','IIM Ahmedabad PGPX','IIM Calcutta MBAEx'],w:['Harvard, Stanford, Wharton, MIT Sloan, Booth, Kellogg, Columbia, Yale SOM and other elite programmes become score-competitive — but not guaranteed.']},
+ {r:'750+',h:'Exceptional score; focus shifts to profile',i:['Top Indian programmes','Top US M7 programmes','LBS / INSEAD / HEC / Cambridge'],w:['At this level, additional points matter less than leadership, impact, academics, career goals, essays and recommendations.']}
+];
+const profileExamples=[
+ {t:'IT / engineering → Wharton',p:'A public 2026 example describes a Pune IT-services engineer with 5 years of experience, 710 GMAT, 7.4 CGPA and delivery-lead responsibility. The winning thread was connecting past work, leadership and a credible future goal.',s:'Public Indian SOP example • Wharton'},
+ {t:'Big 4 → MIT with sub-680',p:'A published success story describes a Big 4 candidate with under 680 GMAT and a low GPA who reached MIT. The differentiators highlighted were leadership, teamwork, commercial acumen, extracurricular evidence and a clear career narrative.',s:'Public MBA4India success story • MIT'},
+ {t:'ISB / Tuck / UCLA',p:'A public success story reports a 740 GMAT, 7.71 GPA and admits to ISB, Tuck and UCLA, after the applicant rebuilt stories and application positioning in a short period.',s:'Public M7Admit success story'},
+ {t:'HBS India essay profiles',p:'Poets&Quants published successful HBS essays from Indian students together with test scores, GPAs and extracurricular context. The lesson: the score makes the profile credible, but the essay reveals the person behind it.',s:'Public Poets&Quants / Harbus collection'}
+];
+function renderScoreMap(){
+ scoreTiles.innerHTML=scoreBands.map((b,i)=>`<div class="scoreTile ${i===4?'open':''}"><div class="scoreHead" onclick="this.parentElement.classList.toggle('open')"><div><div class="scoreRange">${b.r}</div><div class="scoreHint">${b.h}</div></div><div class="chev">⌄</div></div><div class="scoreBody"><div class="schoolGrid">${b.i.map(x=>`<div class="schoolMini"><b>${esc(x)}</b><small class="tag badgeIndia">India</small></div>`).join('')}${b.w.map(x=>`<div class="schoolMini"><b>🌍 Global note</b><small>${esc(x)}</small></div>`).join('')}</div></div></div>`).join('');
+}
+function renderPlan(){
+ if(!data.plan)return;
+ planTable.innerHTML=data.plan.map((d,i)=>`<div class="planDay"><b>${d[0]}</b><input value="${esc(d[1]).replace(/"/g,'&quot;')}" onchange="data.plan[${i}][1]=this.value;save()"><span class="tag">${d[2]}</span></div>`).join('');
+ document.getElementById('profileExamples').innerHTML=profileExamples.map(x=>`<div class="profileCard"><h4>${x.t}</h4><p>${x.p}</p><div class="source">${x.s}</div></div>`).join('');
+}
+function resetPlan(){
+ const base=[['Sep 15','Baseline mock + full analysis','Mock'],['Sep 16','Quant foundations: arithmetic, algebra + 30 timed Q','Quant'],['Sep 17','Verbal: CR fundamentals + 25 questions','Verbal'],['Sep 18','Data Insights: MSR, tables, graphs + 2 sets','DI'],['Sep 19','Quant: number properties + word problems + error review','Quant'],['Sep 20','Verbal: RC + CR timed set + review','Verbal'],['Sep 21','Mini mock: 45–60 min + deep review','Mock'],['Sep 22','Quant weakest 2 topics + 35 timed Q','Quant'],['Sep 23','Verbal weakest 2 types + 30 timed Q','Verbal'],['Sep 24','DI mixed timed set + data sufficiency practice','DI'],['Sep 25','Full mock #2 + same-day mistake classification','Mock'],['Sep 26','Recover 2h max: redo top 10 errors','Review'],['Sep 27','Quant mixed set + timing strategy','Quant'],['Sep 28','Verbal mixed set + timing strategy','Verbal'],['Sep 29','DI mixed set + timing strategy','DI'],['Sep 30','Full mock #3 + detailed review','Mock'],['Oct 1','Patch only recurring errors + formula/strategy sheet','Review'],['Oct 2','Final serious mock + decision on retake readiness','Mock'],['Oct 3','Light review: error log + 20 confidence questions','Light'],['Oct 4','Rest + logistics + sleep; no heavy new material','Recovery']];
+ data.plan=base;save();
+}
+
+function render(){
+ renderScoreMap(); renderPlan();
+ const mocks=[...data.mocks].sort((a,b)=>a.date.localeCompare(b.date));let latest=mocks.at(-1);
+ latestScore.textContent=latest?.score||'—';scoreMeta.textContent=latest?`${latest.date} • Q ${latest.quant||'—'} • V ${latest.verbal||'—'} • DI ${latest.di||'—'}`:'Add your first mock to start tracking.';
+ scoreProgress.style.width=Math.min(100,(latest?.score||0)/7)+'%';mockCount.textContent=data.mocks.length;errorCount.textContent=data.errors.length;
+ let pc=data.profile.length?Math.round(data.profile.filter(x=>x[2]==='DONE').length/data.profile.length*100):0;profilePct.textContent=pc+'%';studyDays.textContent=Math.min(25,data.mocks.length+Math.ceil(data.errors.length/3));
+ mockList.innerHTML=data.mocks.length?mocks.slice().reverse().map((m,i)=>`<div class="row"><div class="rowText"><b>${m.date} · ${m.score}</b><small>Quant ${m.quant||'—'} · Verbal ${m.verbal||'—'} · DI ${m.di||'—'} ${m.note?'· '+esc(m.note):''}</small></div><button class="btn danger" onclick="del('mocks',${data.mocks.indexOf(m)})">Delete</button></div>`).join(''):`<div class="empty">No mocks yet. Log the first one — the dashboard will build itself.</div>`;
+ errorList.innerHTML=data.errors.length?data.errors.map((e,i)=>`<div class="row"><span class="tag">${e.section}</span><div class="rowText"><b>${esc(e.type)}</b><small>${e.reason} · ${esc(e.lesson||'Add a lesson to make this error useful.')}</small></div><button class="btn danger" onclick="del('errors',${i})">Delete</button></div>`).join(''):`<div class="empty">Your error log is empty. That is good — until the first practice set. Then capture everything worth learning from.</div>`;
+ storyList.innerHTML=data.stories.length?data.stories.map((s,i)=>`<div class="row"><div class="rowText"><b>${esc(s.title)}</b><small>${esc(s.result)}</small></div><button class="btn danger" onclick="del('stories',${i})">×</button></div>`).join(''):`<div class="empty">No stories yet. Add the first moment where you led, changed something, or handled ambiguity.</div>`;
+ schoolList.innerHTML=data.schools.length?data.schools.map((s,i)=>`<div class="school"><div><b>${esc(s.name)}</b><small>${esc(s.deadline)}</small></div><span class="tag">${s.status}</span><button class="btn danger" onclick="del('schools',${i})">×</button></div>`).join(''):`<div class="empty">Add 5–8 schools across reach, target and safer-fit categories.</div>`;
+ profileList.innerHTML=data.profile.map((p,i)=>`<div class="row"><input type="checkbox" ${p[2]==='DONE'?'checked':''} onchange="toggleProfile(${i})"><div class="rowText"><b>${p[0]}</b><small>${p[1]}</small></div><span class="tag">${p[2]==='DONE'?'DONE':'NEXT'}</span></div>`).join('');
+ studyList.innerHTML=data.tasks.map((t,i)=>`<div class="row"><input type="checkbox" onchange="this.parentElement.style.opacity=this.checked?.5:1"><div class="rowText"><b>Day ${i+1}</b><small>${t[0]} — ${t[1]}</small></div></div>`).join('');
+ sectionFocus.innerHTML=['Quant','Verbal','Data Insights'].map(s=>{let a=data.errors.filter(e=>e.section===s).length;return `<div class="row"><div class="rowText"><b>${s}</b><small>${a} logged errors</small></div><span class="tag">${a?'REVIEW':'CLEAR'}</span></div>`}).join('');
+ dashTasks.innerHTML=data.tasks.slice(0,4).map((t,i)=>`<div class="row"><span class="tag">0${i+1}</span><div class="rowText"><b>${t[0]}</b><small>${t[1]}</small></div></div>`).join('');
+ chart.innerHTML=mocks.length?mocks.slice(-8).map(m=>`<div style="flex:1;height:100%;display:flex;align-items:end"><div class="bar" title="${m.score}" style="height:${Math.max(8,Math.min(100,m.score/8))}%"></div></div>`).join(''):`<div class="empty" style="width:100%">Your mock scores will appear here.</div>`;
+ chartLabels.innerHTML=mocks.slice(-8).map(m=>`<div style="flex:1;text-align:center;font-size:10px;color:var(--muted)">${m.score||'—'}</div>`).join('');
+ readiness.innerHTML=`<div class="scoreBig">${pc}%</div><p style="color:var(--muted);font-size:12px">Profile work completed. Prioritize high-impact gaps before polishing low-value details.</p><div class="progress"><i style="width:${pc}%"></i></div>`;
+}
+function esc(s){return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function countdown(){
+ const target=new Date('2026-10-10T09:00:00+05:30'),now=new Date(),ms=Math.max(0,target-now),d=Math.floor(ms/864e5),h=Math.floor(ms%864e5/36e5),m=Math.floor(ms%36e5/6e4);
+ days.textContent=Math.ceil((target-new Date('2026-09-15T00:00:00+05:30'))/864e5);dh.textContent=String(d).padStart(2,'0');hh.textContent=String(h).padStart(2,'0');mm.textContent=String(m).padStart(2,'0');
+ today.textContent=now.toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'});
+}
+render();countdown();setInterval(countdown,1000);
+</script>
+</body>
+</html>
